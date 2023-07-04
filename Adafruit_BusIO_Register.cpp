@@ -1,4 +1,8 @@
+#ifdef ARDUINO
 #include <Adafruit_BusIO_Register.h>
+#else
+#include "Adafruit_BusIO_Register.h"
+#endif
 
 #if !defined(SPI_INTERFACES_COUNT) ||                                          \
     (defined(SPI_INTERFACES_COUNT) && (SPI_INTERFACES_COUNT > 0))

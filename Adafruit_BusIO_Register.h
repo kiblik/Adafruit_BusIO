@@ -1,13 +1,25 @@
 #ifndef Adafruit_BusIO_Register_h
 #define Adafruit_BusIO_Register_h
 
+#ifndef ARDUINO
+// We do not support SPI for now
+#define SPI_INTERFACES_COUNT 0
+#endif
+
+#ifdef ARDUINO  // We keep this include because it was in original version of library but it is not necessary
 #include <Arduino.h>
+#endif
 
 #if !defined(SPI_INTERFACES_COUNT) ||                                          \
     (defined(SPI_INTERFACES_COUNT) && (SPI_INTERFACES_COUNT > 0))
 
+#ifdef ARDUINO
 #include <Adafruit_I2CDevice.h>
 #include <Adafruit_SPIDevice.h>
+#else
+#include "Adafruit_I2CDevice.h"
+#include "Adafruit_SPIDevice.h"
+#endif
 
 typedef enum _Adafruit_BusIO_SPIRegType {
   ADDRBIT8_HIGH_TOREAD = 0,
